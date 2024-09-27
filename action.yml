@@ -16,6 +16,9 @@ inputs:
   target:
     description: The target platform
     required: true
+  host:
+    description: The host platform
+    required: false
   toolchain:
     description: |
       The target toolchain to use (one of "stable", "beta", or "nightly").
@@ -54,7 +57,7 @@ runs:
     - name: Install toolchain
       uses: dtolnay/rust-toolchain@master
       with:
-        targets: ${{ inputs.target }}
+        targets: ${{ inputs.host || inputs.target }}
         toolchain: ${{ inputs.toolchain }}
     - name: Determine cross version
       id: determine-cross-version
